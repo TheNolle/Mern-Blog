@@ -1,0 +1,40 @@
+.pagination-component {
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0;
+
+    @media screen and (max-width: 850px) {
+        zoom: 0.7;
+    }
+
+    .button {
+        margin: 0 0.5rem;
+        padding: 0.5rem 1rem;
+        color: #333;
+        background-color: transparent;
+        border: 2px solid #333;
+        border-radius: 5px;
+        text-align: center;
+        transition: all 0.3s ease-in-out;
+
+        &.ellipsis {
+            font-size: 0.7rem;
+            line-height: 0.5;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        &:hover,
+        &.active {
+            cursor: pointer;
+            color: #fff;
+            background-color: #111;
+            border-color: #111;
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+    }
+}

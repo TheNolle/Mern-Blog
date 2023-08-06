@@ -1,0 +1,19 @@
+.search-component {
+    &:disabled {
+        cursor: not-allowed;
+        border-color: #ffe8e6;
+
+        &::placeholder {
+            color: #ffe8e6;
+        }
+
+        &:hover {
+            border-color: #ffe8e6;
+        }
+    }
+
+    &:focus,
+    &:hover {
+        border-color: #111;
+    }
+}
