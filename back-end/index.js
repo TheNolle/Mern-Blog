@@ -28,7 +28,7 @@ app.post('/login', async (request, response) => {
     const userDocument = await UserModel.findOne({ email })
     if (!userDocument) return response.json({ message: 'invalid credentials' })
     if (!bcrypt.compareSync(password, userDocument.password)) return response.json({ message: 'invalid credentials' })
-    jsonwebtoken.sign({ id: userDocument._id, username: userDocument.username }, '27d900f8-124d-5fe3-9e3b-6985ba133f50', async (error, token) => {
+    jsonwebtoken.sign({ id: userDocument._id, username: userDocument.username }, 'd485682a-aa99-55be-8c4e-6bd9d8374bee', async (error, token) => {
         if (error) throw error
         response.cookie('token', token).json({ ok: true, id: userDocument._id, username: userDocument.username })
     })
@@ -37,7 +37,7 @@ app.post('/login', async (request, response) => {
 app.get('/profile', (request, response) => {
     const { token } = request.cookies
     if (!token) return response.json({ message: 'No token found' })
-    jsonwebtoken.verify(token, '27d900f8-124d-5fe3-9e3b-6985ba133f50', async (error, decoded) => {
+    jsonwebtoken.verify(token, 'd485682a-aa99-55be-8c4e-6bd9d8374bee', async (error, decoded) => {
         if (error || !decoded) return response.json({ message: 'Invalid token' })
         response.json({ ok: true, decoded })
     })
@@ -50,7 +50,7 @@ app.post('/logout', (request, response) => {
 app.post('/create', async (request, response) => {
     const { token } = request.cookies
     if (!token) return response.json({ message: 'No token found' })
-    jsonwebtoken.verify(token, '27d900f8-124d-5fe3-9e3b-6985ba133f50', async (error, decoded) => {
+    jsonwebtoken.verify(token, 'd485682a-aa99-55be-8c4e-6bd9d8374bee', async (error, decoded) => {
         if (error || !decoded) return response.json({ message: 'Invalid token' })
         const { title, summary, cover, content } = request.body
         const postDocument = await PostModel.create({ author: decoded.id, title, summary, cover, content })
@@ -71,7 +71,7 @@ app.get('/post/:id', async (request, response) => {
 app.put('/post/:id', async (request, response) => {
     const { token } = request.cookies
     if (!token) return response.json({ message: 'No token found' })
-    jsonwebtoken.verify(token, '27d900f8-124d-5fe3-9e3b-6985ba133f50', async (error, decoded) => {
+    jsonwebtoken.verify(token, 'd485682a-aa99-55be-8c4e-6bd9d8374bee', async (error, decoded) => {
         if (error || !decoded) return response.json({ message: 'Invalid token' })
         const { id } = request.params
         const { title, summary, cover, content } = request.body
@@ -83,7 +83,7 @@ app.put('/post/:id', async (request, response) => {
 app.delete('/post/:id', async (request, response) => {
     const { token } = request.cookies
     if (!token) return response.json({ message: 'No token found' })
-    jsonwebtoken.verify(token, '27d900f8-124d-5fe3-9e3b-6985ba133f50', async (error, decoded) => {
+    jsonwebtoken.verify(token, 'd485682a-aa99-55be-8c4e-6bd9d8374bee', async (error, decoded) => {
         if (error || !decoded) return response.json({ message: 'Invalid token' })
         const { id } = request.params
         try {
